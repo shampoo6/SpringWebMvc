@@ -1,0 +1,11 @@
+server:
+  port: 8080
+
+spring:
+  data:
+    mongodb:
+      database: "test3"
+      username: "dbAdmin"
+      password: "123456"
+  mvc:
+    static-path-pattern: "/static"
