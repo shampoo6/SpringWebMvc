@@ -7,5 +7,5 @@ spring:
       database: "test3"
       username: "dbAdmin"
       password: "123456"
-  mvc:
-    static-path-pattern: "/static"
+  resources:
+    static-locations: classpath:static/
