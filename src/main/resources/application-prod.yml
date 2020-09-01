@@ -9,5 +9,3 @@ spring:
       password: "123456"
   resources:
     static-locations: classpath:static/
-  profiles:
-    active: @env@
