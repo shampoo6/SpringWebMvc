@@ -1,11 +1,2 @@
 server:
   port: 8082
-
-spring:
-  data:
-    mongodb:
-      database: "test3"
-      username: "dbAdmin"
-      password: "123456"
-  resources:
-    static-locations: classpath:static/

@@ -1,5 +1,6 @@
 package com.shampoo6.webmvc.core.config;
 
+import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import lombok.extern.java.Log;
@@ -23,17 +24,29 @@ import java.util.List;
 @Log
 @Configuration
 public class MongoConfig {
-
     // 获取application.yml的配置
     @Value("${spring.data.mongodb.database}")
-    private String mongoDB;
+    private String database;
+    @Value("${spring.data.mongodb.username}")
+    private String username;
+    @Value("${spring.data.mongodb.password}")
+    private String password;
+    @Value("${spring.data.mongodb.host}")
+    private String host;
+    @Value("${spring.data.mongodb.port}")
+    private String port;
+    @Value("${spring.data.mongodb.auto-index-creation}")
+    private boolean autoIndexCreation;
 
     /*
      * Use the standard Mongo driver API to create a com.mongodb.client.MongoClient instance.
      */
     public @Bean
     MongoClient mongoClient() {
-        return MongoClients.create("mongodb://localhost:27017");
+//        mongodb://dbAdmin:123456@localhost:27017/test3?authSource=test3
+        String uri = "mongodb://" + username + ":" + password + "@" + host + ":" + port + "/" + database + "?authSource=" + database;
+        return MongoClients.create(uri);
+//        return MongoClients.create("mongodb://localhost:27017");
     }
 
     public @Bean
@@ -44,7 +57,7 @@ public class MongoConfig {
 
     public @Bean
     MongoDatabaseFactory mongoDatabaseFactory() {
-        return new SimpleMongoClientDatabaseFactory(mongoClient(), mongoDB);
+        return new SimpleMongoClientDatabaseFactory(mongoClient(), database);
     }
 
     @Bean
@@ -56,6 +69,7 @@ public class MongoConfig {
     @Bean
     public MappingMongoConverter mongoConverter() {
         MongoMappingContext mappingContext = new MongoMappingContext();
+        mappingContext.setAutoIndexCreation(autoIndexCreation);
         DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDatabaseFactory());
         MappingMongoConverter mongoConverter = new MappingMongoConverter(dbRefResolver, mappingContext);
         mongoConverter.setCustomConversions(customConversions());

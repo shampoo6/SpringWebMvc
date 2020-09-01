@@ -25,8 +25,7 @@ public class TestController {
         Assert.hasText(name, "书名不能为空");
         Assert.hasText(author, "作者不能为空");
         Assert.notNull(price, "价格不能为空");
-        String id = bookService.save(name, author, price);
-        return id;
+        return bookService.save(name, author, price);
     }
 
     @RequestMapping("/update")

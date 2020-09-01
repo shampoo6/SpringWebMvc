@@ -7,6 +7,9 @@ spring:
       database: "test3"
       username: "dbAdmin"
       password: "123456"
+      port: 27017
+      auto-index-creation: true
+      host: 127.0.0.1
   resources:
     static-locations: classpath:static/
   profiles:
