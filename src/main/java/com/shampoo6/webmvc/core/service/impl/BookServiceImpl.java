@@ -1,15 +1,17 @@
 package com.shampoo6.webmvc.core.service.impl;
 
+import com.shampoo6.webmvc.core.constant.BizCode;
 import com.shampoo6.webmvc.core.dao.BookDao;
 import com.shampoo6.webmvc.core.domain.Book;
+import com.shampoo6.webmvc.core.exception.BizException;
 import com.shampoo6.webmvc.core.service.BookService;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 
-@Log
+@Log4j2
 @Service
 public class BookServiceImpl implements BookService {
 
@@ -23,6 +25,9 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public String save(String name, String author, Double price) {
+        if(name.contains("共产党")) {
+            throw new BizException(BizCode.MinGanCi, "共产党");
+        }
         Book book = new Book(name, author, new BigDecimal(price));
         book = bookDao.save(book);
         return book.getId();

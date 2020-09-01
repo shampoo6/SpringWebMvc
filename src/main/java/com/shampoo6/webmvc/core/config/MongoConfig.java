@@ -1,9 +1,8 @@
 package com.shampoo6.webmvc.core.config;
 
-import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,7 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import java.util.ArrayList;
 import java.util.List;
 
-@Log
+@Log4j2
 @Configuration
 public class MongoConfig {
     // 获取application.yml的配置

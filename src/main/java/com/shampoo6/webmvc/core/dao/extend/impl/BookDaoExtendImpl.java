@@ -3,7 +3,7 @@ package com.shampoo6.webmvc.core.dao.extend.impl;
 import com.mongodb.client.result.UpdateResult;
 import com.shampoo6.webmvc.core.dao.extend.BookDaoExtend;
 import com.shampoo6.webmvc.core.domain.Book;
-import lombok.extern.java.Log;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -12,7 +12,7 @@ import org.springframework.data.mongodb.core.query.Update;
 
 import java.util.Date;
 
-@Log
+@Log4j2
 public class BookDaoExtendImpl implements BookDaoExtend {
 
     @Autowired
